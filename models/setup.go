@@ -18,10 +18,10 @@ func ConnectionDatabase() {
 	}
 
 	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_HOST")
-	dbUser := os.Getenv("DB_HOST")
-	dbPass := os.Getenv("DB_HOST")
-	dbName := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbUser := os.Getenv("DB_USER")
+	dbPass := os.Getenv("DB_PASS")
+	dbName := os.Getenv("DB_NAME")
 
 	dsn := dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName + "?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -31,6 +31,7 @@ func ConnectionDatabase() {
 	}
 
 	db.AutoMigrate(&Dokter{})
+	db.AutoMigrate(&Poli{})
 
 	DB = db
 }
