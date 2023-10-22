@@ -1,4 +1,4 @@
-package controllers
+package doktercontroller
 
 import (
 	"elisabethapi/models"
@@ -43,7 +43,7 @@ func Show (c *fiber.Ctx) error {
 func Create (c *fiber.Ctx) error {
 
 	var dokter models.Dokter
-	if err := c.BodyParser(&dokter); err!= nil {
+	if err := c.BodyParser(&dokter); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": err.Error(),
 		})
