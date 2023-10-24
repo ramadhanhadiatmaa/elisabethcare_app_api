@@ -3,6 +3,7 @@ package models
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
@@ -25,6 +26,18 @@ func ConnectionDatabase() {
 
 	dsn := dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName + "?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
+	if err != nil {
+		panic(err)
+	}
+
+	sqlDB, err := db.DB()
+
+	sqlDB.SetMaxIdleConns(100)
+
+	sqlDB.SetMaxOpenConns(100)
+
+	sqlDB.SetConnMaxLifetime(1 * time.Hour)
 
 	if err != nil {
 		panic(err)
