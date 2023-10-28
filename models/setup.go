@@ -31,17 +31,13 @@ func ConnectionDatabase() {
 		panic(err)
 	}
 
-	sqlDB, err := db.DB()
+	sqlDB, _ := db.DB()
 
 	sqlDB.SetMaxIdleConns(100)
 
 	sqlDB.SetMaxOpenConns(100)
 
 	sqlDB.SetConnMaxLifetime(1 * time.Hour)
-
-	if err != nil {
-		panic(err)
-	}
 
 	db.AutoMigrate(&Dokter{})
 	db.AutoMigrate(&Poli{})

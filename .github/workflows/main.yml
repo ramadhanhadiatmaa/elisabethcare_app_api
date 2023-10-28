@@ -44,6 +44,6 @@ jobs:
             docker stop elisabethapi || true && docker rm elisabethapi || true
             docker pull ${{ vars.IMAGE_NAME }}
 
-            docker run -d -p 8081:8081 --name ${{ vars.CONTAINER_NAME }} \
+            docker run --restart always -d -p 8081:8081 --name ${{ vars.CONTAINER_NAME }} \
             -v /var/www/elisabethapi/.env:/app/.env \
             ${{ vars.IMAGE_NAME }}
