@@ -3,6 +3,7 @@ package models
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
@@ -29,6 +30,14 @@ func ConnectionDatabase() {
 	if err != nil {
 		panic(err)
 	}
+
+	sqlDB, _ := db.DB()
+
+	sqlDB.SetMaxIdleConns(100)
+
+	sqlDB.SetMaxOpenConns(100)
+
+	sqlDB.SetConnMaxLifetime(1 * time.Hour)
 
 	db.AutoMigrate(&Dokter{})
 	db.AutoMigrate(&Poli{})
