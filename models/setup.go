@@ -41,6 +41,7 @@ func ConnectionDatabase() {
 
 	db.AutoMigrate(&Dokter{})
 	db.AutoMigrate(&Poli{})
+	db.AutoMigrate(&Booking{})
 
 	DB = db
 }

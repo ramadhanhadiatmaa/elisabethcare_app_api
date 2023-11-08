@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"elisabethapi/controllers/bookingcontroller"
 	"elisabethapi/controllers/doktercontroller"
 	"elisabethapi/controllers/policontroller"
 	"elisabethapi/middlewares"
@@ -11,6 +12,7 @@ import (
 func Route(r *fiber.App) {
 	dokter := r.Group("/dokter")
 	poli := r.Group("/poli")
+	booking := r.Group("/booking")
 
 	dokter.Get("/", middlewares.AuthMiddleware, doktercontroller.Index)
 	dokter.Get("/:kode_dokter", middlewares.AuthMiddleware, doktercontroller.Show)
@@ -23,4 +25,10 @@ func Route(r *fiber.App) {
 	poli.Post("/", middlewares.AuthMiddleware, policontroller.Create)
 	poli.Put("/:kode_poli", middlewares.AuthMiddleware, policontroller.Update)
 	poli.Delete("/:kode_poli", middlewares.AuthMiddleware, policontroller.Delete)
+
+	booking.Get("/", middlewares.AuthMiddleware, bookingcontroller.Index)
+	booking.Get("/:no_booking", middlewares.AuthMiddleware, bookingcontroller.Show)
+	booking.Post("/", middlewares.AuthMiddleware, bookingcontroller.Create)
+	booking.Put("/:no_booking", middlewares.AuthMiddleware, bookingcontroller.Update)
+	booking.Delete("/:no_booking", middlewares.AuthMiddleware, bookingcontroller.Delete)
 }
