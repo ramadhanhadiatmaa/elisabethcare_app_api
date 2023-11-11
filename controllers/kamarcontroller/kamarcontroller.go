@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func Index(c *fiber.Ctx) error {
+func Index (c *fiber.Ctx) error {
 
 	var kamar []models.Kamar
 	models.DB.Find(&kamar)
@@ -18,7 +18,7 @@ func Index(c *fiber.Ctx) error {
 
 }
 
-func Show(c *fiber.Ctx) error {
+func Show (c *fiber.Ctx) error {
 
 	id := c.Params("id")
 
@@ -37,12 +37,11 @@ func Show(c *fiber.Ctx) error {
 	return c.JSON(kamar)
 }
 
-func Create(c *fiber.Ctx) error {
+func Create (c *fiber.Ctx) error {
 
 	var kamar models.Kamar
-
 	if err := c.BodyParser(&kamar); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"message": err.Error(),
 		})
 	}
@@ -50,7 +49,7 @@ func Create(c *fiber.Ctx) error {
 	kamar.UpdatedAt = time.Now()
 
 	if err := models.DB.Create(&kamar).Error; err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"message": err.Error(),
 		})
 	}
@@ -60,7 +59,7 @@ func Create(c *fiber.Ctx) error {
 	})
 }
 
-func Update(c *fiber.Ctx) error {
+func Update (c *fiber.Ctx) error {
 
 	id := c.Params("id")
 
@@ -84,7 +83,7 @@ func Update(c *fiber.Ctx) error {
 	})
 }
 
-func Delete(c *fiber.Ctx) error {
+func Delete (c *fiber.Ctx) error {
 
 	id := c.Params("id")
 
