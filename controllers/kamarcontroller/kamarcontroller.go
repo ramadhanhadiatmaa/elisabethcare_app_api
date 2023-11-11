@@ -37,7 +37,7 @@ func Show (c *fiber.Ctx) error {
 	return c.JSON(kamar)
 }
 
-func Create (c *fiber.Ctx) error {
+func Create (c *fiber.Ctx) error{
 
 	var kamar models.Kamar
 	if err := c.BodyParser(&kamar); err != nil {
@@ -59,7 +59,7 @@ func Create (c *fiber.Ctx) error {
 	})
 }
 
-func Update (c *fiber.Ctx) error {
+func Update (c *fiber.Ctx) error{
 
 	id := c.Params("id")
 
